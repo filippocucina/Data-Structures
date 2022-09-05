@@ -3,8 +3,22 @@
 #include <string.h>
 
 
+/* struct Node {
+ *	int value;
+ *	struct Node *next;
+ * }
+ *		
+ *	    /\
+ *	    ||
+ *	    ||
+ * Lista Enlazada Simple
+ */
+
+
+//Lista Enlazada Doble
 struct Node {
 	int value;
+	struct Node *prev;
 	struct Node *next;
 };
 
@@ -27,13 +41,35 @@ node_t print_list(node_t *head) {
 node_t *create_new_node(int value) {
 	node_t *result = malloc(sizeof(node_t));
 	result->value = value;
+	result->prev = NULL;
 	result->next = NULL;
 	return result;
 }
 
 
+void remove_node(node_t **head, node_t *node_to_remove) {
+	if (*head == node_to_remove) {
+		*head = node_to_remove->next;
+		if (*head != NULL) {
+			(*head)->prev = NULL;
+		}
+	} else {
+		node_to_remove->prev->next = node_to_remove;
+		
+		if (node_to_remove->next != NULL) {
+			node_to_remove->next->prev = node_to_remove->prev;
+		}		
+	}
+	node_to_remove->next = NULL;
+	node_to_remove->prev = NULL;	
+
+	return;
+}
+
+
 node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
 	node_to_insert->next = *head;
+	(*head)->prev = node_to_insert;
 	*head = node_to_insert;
 	return node_to_insert;
 }
@@ -41,6 +77,13 @@ node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
 
 void *insert_after_node(node_t *node_to_insert_after, node_t *new_node) {
 	new_node->next = node_to_insert_after->next;
+	
+	if (new_node->next != NULL) {
+		new_node->next->prev = node_to_insert_after;
+	}
+
+	new_node->prev = node_to_insert_after;
+
 	node_to_insert_after->next = new_node;
 }
 
@@ -88,5 +131,10 @@ int main(int argc, char **argv)
 	
        	print_list(head);
 	
+	remove_node(&head, tmp);
+	remove_node(&head, head);
+	
+	printf(head);
+
 	return 0;
 }
