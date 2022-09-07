@@ -69,8 +69,13 @@ void remove_node(node_t **head, node_t *node_to_remove) {
 
 node_t *insert_at_head(node_t **head, node_t *node_to_insert) {
 	node_to_insert->next = *head;
-	(*head)->prev = node_to_insert;
+	
+	if (*head != NULL) {
+		(*head)->prev = node_to_insert;
+	}
+	
 	*head = node_to_insert;
+	node_to_insert->prev = NULL;
 	return node_to_insert;
 }
 
@@ -134,7 +139,7 @@ int main(int argc, char **argv)
 	remove_node(&head, tmp);
 	remove_node(&head, head);
 	
-	printf(head);
-
+	printf("\n");
+	print_list(head);
 	return 0;
 }
