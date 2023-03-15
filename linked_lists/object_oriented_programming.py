@@ -10,7 +10,7 @@ class MyClass:
 
 
     @staticmethod
-    def stactimethod():
+    def staticmethod():
         return "Static Method Called"
 
 #Instancia Objeto de la Clase
@@ -23,3 +23,8 @@ print("\n", MyClass.method(obj2))
 objeto = MyClass()
 objeto.classmethod()
 print("\n", objeto.classmethod())
+
+#Instancia para usar el @staticmethod
+objeto2 = MyClass()
+objeto2.staticmethod()
+print("\n", objeto2.staticmethod())
