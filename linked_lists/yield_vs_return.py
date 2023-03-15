@@ -12,6 +12,7 @@ def cadena3(text_return):
 
 def main():
     print(cadena())
+    print("\n\n", cadena2())
 
     #TODO
     #write in the main function: print(cadena2()), print(cadena3())
