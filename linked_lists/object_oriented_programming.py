@@ -1,6 +1,5 @@
 class MyClass:
     def method(self):
-        #print("Instance Method Called", self)
         return "Instance Method Called", self
 
     
@@ -28,3 +27,10 @@ print("\n", objeto.classmethod())
 objeto2 = MyClass()
 objeto2.staticmethod()
 print("\n", objeto2.staticmethod())
+
+print("\n")
+MyClass.classmethod()
+print("\n")
+MyClass.staticmethod()
+print("\n")
+MyClass.method()
